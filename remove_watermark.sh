@@ -35,7 +35,7 @@ if [[ "$counter" -lt 2 ]]; then
 fi
 
 echo "Extracting watermark..."
-./get_watermark.py "$tmpdir"
+python ./get_watermark.py "$tmpdir"
 
 echo "Removing watermark in video..."
 ffmpeg -hide_banner -loglevel warning -y -stats -i "$1" -acodec copy -vf "removelogo=$tmpdir/mask.png" "$output_file"
