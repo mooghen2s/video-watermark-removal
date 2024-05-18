@@ -23,4 +23,4 @@ jobs:
         sudo apt install ffmpeg
         pip install -r requirements.txt
     - run: |
-        ./remove_watermark.sh ./input/1.mp4 
+        ./remove_watermark.sh ./input/1.mp4 700
