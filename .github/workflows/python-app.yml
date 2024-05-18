@@ -24,3 +24,8 @@ jobs:
         pip install -r requirements.txt
     - run: |
         ./remove_watermark.sh input/1.mp4 output/1.mp4 700
+        git add output/1.mp4
+        git config --global user.name 'Your Name'
+        git config --global user.email 'your-username@users.noreply.github.com'
+        git commit -am "Automated report"
+        git push
