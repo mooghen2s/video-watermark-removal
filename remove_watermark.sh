@@ -14,8 +14,7 @@ max_frames="${3:-50}"
 keyframes_time=$(ffprobe -hide_banner -loglevel warning -select_streams v -skip_frame nokey -show_frames -show_entries frame=pkt_dts_time "$1" | grep "pkt_dts_time=" | xargs shuf -n "$max_frames" -e | awk -F  "=" '{print $2}')
 
 # Save them as images, in a temporary directory
-mkdir watermark_remove
-tmpdir="watermark_remove"
+tmpdir=$(mktemp -d 2>/dev/null || mktemp -d -t 'watermark_remove')
 counter=0
 echo -n "Extracting frames (up to: $max_frames)... "
 for i in $keyframes_time; do
@@ -30,10 +29,10 @@ done
 echo
 
 # Abort if we couldn't extract frames for some reason
-if [[ "$counter" -lt 2 ]]; then
-    echo "$counter frames extracted, need at least 2, aborting."
-    exit 1
-fi
+#if [[ "$counter" -lt 2 ]]; then
+#    echo "$counter frames extracted, need at least 2, aborting."
+#    exit 1
+#fi
 
 echo "Extracting watermark..."
 python ./get_watermark.py "$tmpdir"
