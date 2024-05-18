@@ -14,7 +14,8 @@ max_frames="${3:-50}"
 keyframes_time=$(ffprobe -hide_banner -loglevel warning -select_streams v -skip_frame nokey -show_frames -show_entries frame=pkt_dts_time "$1" | grep "pkt_dts_time=" | xargs shuf -n "$max_frames" -e | awk -F  "=" '{print $2}')
 
 # Save them as images, in a temporary directory
-tmpdir=$(mktemp -d 2>/dev/null || mktemp -d -t 'watermark_remove')
+mkdir watermark_remove
+tmpdir="watermark_remove"
 counter=0
 echo -n "Extracting frames (up to: $max_frames)... "
 for i in $keyframes_time; do
@@ -22,7 +23,7 @@ for i in $keyframes_time; do
         echo "Skipping unrecognize timing: $i"
         continue
     fi
-    ffmpeg -y -ss "$i" -i "$1" -vframes 1 "$tmpdir/output_$counter.png"
+    ffmpeg -y -hide_banner -loglevel error -ss "$i" -i "$1" -vframes 1 "$tmpdir/output_$counter.png"
     echo -n "$counter "
     ((counter=counter+1))
 done
