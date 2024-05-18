@@ -23,7 +23,7 @@ jobs:
         sudo apt install ffmpeg
         pip install -r requirements.txt
     - run: |
-        ./remove_watermark.sh input/1.mp4 output/1.mp4 700
+        ./test.sh
         git add output/1.mp4
         git config --global user.name 'Your Name'
         git config --global user.email 'your-username@users.noreply.github.com'
