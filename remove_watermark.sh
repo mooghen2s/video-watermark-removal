@@ -38,7 +38,7 @@ echo "Extracting watermark..."
 python ./get_watermark.py "$tmpdir"
 
 echo "Removing watermark in video..."
-ffmpeg -hide_banner -loglevel warning -y -stats -i "$1" -acodec copy -vf "removelogo=$tmpdir/mask.png" "$output_file"
+ffmpeg -hide_banner -loglevel warning -y -stats -i "$1" -acodec copy -vf "removelogo=input/mask1.png" "$output_file"
 
 rm -rf "$tmpdir"
 
