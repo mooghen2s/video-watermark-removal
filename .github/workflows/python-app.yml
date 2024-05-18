@@ -17,7 +17,7 @@ jobs:
         # The cache key depends on requirements.txt
         key: ${{ runner.os }}-venv-${{ hashFiles('**/requirements*.txt') }}
         restore-keys: |
-          ${{ runner.os }}-venv-
+          ${{ runner.os }}-venv-987caff483a7f749e86aa23fd66c85450f53a16643587c2a9e4f50d1c820e892
     - run: |
         sudo apt update
         sudo apt install ffmpeg
