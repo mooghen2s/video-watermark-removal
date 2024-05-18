@@ -22,7 +22,7 @@ for i in $keyframes_time; do
         echo "Skipping unrecognize timing: $i"
         continue
     fi
-    ffmpeg -y -hide_banner -loglevel error -ss "$i" -i "$1" -vframes 1 "$tmpdir/output_$counter.png"
+    ffmpeg -y -ss "$i" -i "$1" -vframes 1 "$tmpdir/output_$counter.png"
     echo -n "$counter "
     ((counter=counter+1))
 done
